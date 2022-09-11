@@ -10,11 +10,11 @@ with open(input1, 'r') as filer:
     for line in filer:
         with open(fuzz, 'r') as filee:
             for fuzzline in filee:
-                process = os.popen("curl -so /dev/null https://"+line.rstrip()+"/"+fuzzline.rstrip()+" -w %{http_code}").read()
+                process = os.popen("curl -m 3.3 -so /dev/null https://"+line.rstrip()+"/"+fuzzline.rstrip()+" -w %{http_code}").read()
                 if process == '200' or process == '403':
                     print("https://"+line.rstrip()+"/"+fuzzline.rstrip()+"    "+process+"\r")
                     print("https://"+line.rstrip()+"/"+fuzzline.rstrip()+"    "+process+"\r", file=output1)
-                process = os.popen("curl -so /dev/null http://"+line.rstrip()+"/"+fuzzline.rstrip()+" -w %{http_code}").read()
+                process = os.popen("curl -m 3.3 -so /dev/null http://"+line.rstrip()+"/"+fuzzline.rstrip()+" -w %{http_code}").read()
                 if process == '200' or process == '403':
                     print("http://"+line.rstrip()+"/"+fuzzline.rstrip()+"     "+process+"\r")
                     print("http://"+line.rstrip()+"/"+fuzzline.rstrip()+"     "+process+"\r", file=output1)
